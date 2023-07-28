@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { jwtState, userEmailState } from "..";
 import NavBar from "../component/NavBar";
-import FeedCreate from "../component/feed/FeedCreate";
-import FeedBriefCard from "../component/feed/FeedBreifCard";
 import { useEffect, useRef, useState } from "react";
 import { REST_SERVER_ADDRESS } from "../common/constant";
 
@@ -88,7 +86,7 @@ function HomePage() {
               </div>
               <div>
                 <input type="file" name="attaches" accept="image/" multiple />
-                <button className="btn btn-sm btn-secondary"><i className="bi bi-file-image"></i></button>
+                <button className="btn btn-sm btn-secondary"><i class="bi bi-images"></i></button>
               </div>
             </div>
           </div>

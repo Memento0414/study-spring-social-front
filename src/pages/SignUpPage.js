@@ -5,6 +5,7 @@
 import { useRef, useState } from "react";
 import { REST_SERVER_ADDRESS } from "../common/constant";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../component/NavBar";
 
 function SignUpPage() {
     const [availableFlag, setAvailableFlag] = useState(0);
@@ -97,44 +98,47 @@ function SignUpPage() {
     //html 영역==============================================================================================
     return (
         <>
-            <h2>계정을 생성하세요.</h2>
-            <hr />
-            <form ref={formRef} onSubmit={signupSubmitHandle}>
-                <p>
-                    <span className="form-label">이름</span>
-                    <input type="text" placeholder="이름" name="name" className="form-control" onChange={(evt) => {
-                        if (evt.target.value !== "") {
-                            evt.target.classList.add("is-valid");
-                            evt.target.classList.remove("is-invalid");
-                        } else {
-                            evt.target.classList.add("is-invalid");
-                            evt.target.classList.remove("is-valid");
-                        }
+            <NavBar />
+            <div className="container mt-5 pt-3">
+                <div>
+                    <b><h2>계정을 생성하세요.</h2></b>
+                    <br/>
+                </div>
+                <form ref={formRef} onSubmit={signupSubmitHandle}>
+                    <div className="mb-3">
+                        <input type="text" placeholder="이름" name="name" className="form-control" onChange={(evt) => {
+                            if (evt.target.value !== "") {
+                                evt.target.classList.add("is-valid");
+                                evt.target.classList.remove("is-invalid");
+                            } else {
+                                evt.target.classList.add("is-invalid");
+                                evt.target.classList.remove("is-valid");
+                            }
 
-                    }} />
-                </p>
-                <p>
-                    <span>이메일</span>
-                    <input type="text" placeholder="이메일" onChange={emailChangeHandle} name="email" ref={emailRef} />
-                    <button type="button" ref={varifyBtnRef} onClick={verifyBtnClickHandle}>이메일인증</button>
-                </p>
+                        }} />
+                    </div>
+                    <div className="mb-3 m2" style={{display:"flex", justifyContent:"space-between"}}>
+                        <input type="text" placeholder="이메일" className="form-control" onChange={emailChangeHandle} name="email" ref={emailRef} style={{width:"92%"}}/>
+                         <button type="button" style={{backgroundColor:"skyblue", border:"1px skyblue solid", borderRadius:"8px"}} ref={varifyBtnRef} onClick={verifyBtnClickHandle}>이메일인증</button>
+                    </div>
 
-                {availableFlag === 1 && <p style={{ color: "green" }}><b>사용가능한 이메일입니다.</b></p>}
-                {availableFlag === -1 && <p style={{ color: "red" }}><b>이미 사용한 이메일입니다.</b></p>}
-                {availableFlag === 2 && <p>
-                    <span>이메일 인증코드</span>
-                    <input type="text" placeholder="인증코드" onKeyDown={codeSubmitHandle} />
-                </p>}
+                    {availableFlag === 1 && <div style={{ color: "green" , marginBottom:"16px"}}><b>사용가능한 이메일입니다.</b></div>}
+                    {availableFlag === -1 && <div style={{ color: "red", marginBottom:"16px"}}><b>이미 사용한 이메일입니다.</b></div>}
+                    {availableFlag === 2 && 
+                        <div className="mb-3 m2"> 
+                            <input type="text" className="form-control" placeholder="인증코드 입력 후 엔터를 눌러주세요." onKeyDown={codeSubmitHandle} style={{width:"30%"}}/>
+                        </div>
+                    }
 
 
-                <p>
-                    <span>비밀번호</span>
-                    <input type="password" placeholder="비밀번호" ref={passwordRef} />
-                </p>
-                <p>
-                    <button type="submit">가입하기</button>
-                </p>
-            </form>
+                    <div className="mb-3">
+                        <input type="password" placeholder="비밀번호" ref={passwordRef} className="form-control"/>
+                    </div>
+                    <div className="mb-3">
+                        <button type="submit" className="form-control text-bg-dark">가입하기</button>
+                    </div>
+                </form>
+            </div>
         </>
     );
 }

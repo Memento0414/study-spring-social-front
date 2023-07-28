@@ -13,7 +13,7 @@ function FeedCreate() {
         </div>
         <div>
             <input type="file" style={{display:"none"}}/>
-            <button className="btn btn-sm btn-secondary"><i className="bi bi-file-image"></i></button>
+            <button className="btn btn-sm btn-secondary"><i class="bi bi-images"></i></button>
         </div>
         </div>
     </div>);

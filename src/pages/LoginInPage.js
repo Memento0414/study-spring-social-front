@@ -71,23 +71,23 @@ function LoginPage() {
     return (
         <>
             <NavBar />
-            <div className="container pt-3">
+            <div className="container mt-5 pt-3">
                 <h2>#로그인</h2>
-
+                 <br/>
                 <form onSubmit={loginFormHandle} ref={formRef}>
                     <div className="mb-3">
                         <span className="form-label">사용자이메일(*)</span>
-                        <input type="text" className="form-control" name="email" />
+                        <input type="text" className="form-control mt-2" name="email" />
                     </div>
                     <div className="mb-3">
                         <span className="form-label">사용자비밀번호(*)</span>
-                        <input type="password" className="form-control" name="password" />
+                        <input type="password" className="form-control mt-2" name="password" />
                     </div>
                     <div className="mb-3">
-                        <button type="submit" className="form-control">로그인</button>
+                        <button type="submit" className="form-control text-bg-dark">로그인</button>
                     </div>
                     <div className="mb-3">
-                        <button type="button" className="form-control" onClick={kakaoLoginHandle}>카카오로 로그인하기</button>
+                        <button type="button" className="form-control text-bg-warning" onClick={kakaoLoginHandle}>카카오로 로그인하기</button>
                     </div>
                 </form>
                 <div className="text-center">
