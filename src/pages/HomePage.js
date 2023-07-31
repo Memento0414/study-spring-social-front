@@ -44,6 +44,7 @@ function HomePage() {
     body.append("description", description);
 
     const attaches = formRef.current.attaches.files;
+
     if (attaches.length != 0) {
       for (var file of attaches) {
         body.append("attaches", file);
