@@ -29,23 +29,20 @@ function NavBar() {
         </div>
         <div className="offcanvas-body">
           <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">Home</a>
+            <li className="nav-item" data-bs-dismiss="offcanvas"> 
+              <Link className="nav-link active" aria-current="page" to="/">Home</Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/flow/login">로그인</a>
+            <li className="nav-item" data-bs-dismiss="offcanvas">
+              <Link className="nav-link" to="/flow/login">로그인</Link>
             </li>
               {jwt && <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Dropdown
-              </a>
+              </Link>
               <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/settings/profile">정보변경</a></li>
-                <li><a className="dropdown-item" href="">Another action</a></li>
-                <li>
-                  <hr className="dropdown-divider"/>
-                </li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                <li data-bs-dismiss="offcanvas"><Link className="dropdown-item" to="/settings/profile">정보변경</Link></li>
+                <li data-bs-dismiss="offcanvas"><Link className="dropdown-item" to="/flow/logout">로그아웃</Link></li>
+                <li data-bs-dismiss="offcanvas"><Link className="dropdown-item" to="#">Something else here</Link></li>  
               </ul>
             </li>}
           </ul>

@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import KakaoCallBackPage from './pages/KakaoCallBackPage'
 import DeactivatePage from './pages/settings/DeactivatePage';
 import ProfilePage from './pages/settings/ProfilePage';
+import Logout from './pages/settings/Logout';
 
 
 export const jwtState = atom(
@@ -28,7 +29,8 @@ const router = createBrowserRouter(
     { path: "/flow/kakao/callback", element: <KakaoCallBackPage/> },
     { path: "/home", element: <HomePage/> },
     { path: "/settings/deactivate", element: <DeactivatePage/> },
-    { path: "/settings/profile", element: <ProfilePage/> }
+    { path: "/settings/profile", element: <ProfilePage/> },
+    { path: "/flow/logout" , element: <Logout/>}
   ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

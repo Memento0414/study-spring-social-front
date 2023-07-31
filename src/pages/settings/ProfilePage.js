@@ -88,17 +88,19 @@ function ProfilePage() {
             <NavBar />
             <>
                 <Link to="/">되돌아가기</Link>
-                <div className="container pt-3">
+                <div className="container pt-3" style={{height : "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end"}}>
                     <h4>#개인정보수정</h4>
-                    <form onSubmit={submitHandle}>
+                    <form onSubmit={submitHandle} style={{border:"2px skyblue solid", borderRadius:"8px", padding: "16px"}}>
                         <p>
-                            <img style={{ width: "300px", height: "300px", cursor: "pointer" }} ref={imageRef} onClick={imgClickHandle} />
+                            <img style={{ width: "300nppx", height: "300px", cursor: "pointer" , borderRadius: "24px"}} ref={imageRef} onClick={imgClickHandle} />
                             <input type="file" accept="image/*" ref={fileRef} onChange={fileChangeHandle} style={{ display: "none" }} />
                         </p>
                         <p>
-                            <input type="text" ref={nameRef} />
+                            <input type="text" ref={nameRef} style={{width: "300px", height:"50px"}}/>
                         </p>
-                        <button type="submit">수정</button>
+                        <p style={{display: "flex", justifyContent: "center"}}>
+                            <button type="submit" style={{width: "80px", height: "40px", borderRadius: "8px", backgroundColor: "skyblue"}}>수정</button>
+                        </p>
                     </form>
                 </div>
             </>
