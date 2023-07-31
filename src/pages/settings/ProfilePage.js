@@ -4,14 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { jwtState } from "../..";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../component/NavBar";
-
+import defaultImage from "../../common/image/default.png";
 
 function ProfilePage() {
     const [jwt, setJwt] = useRecoilState(jwtState);
     const nameRef = useRef();
     const imageRef = useRef();
     const fileRef = useRef();
-    const navigate =useNavigate();
+    const navigate = useNavigate();
+    const [data, setData] = useState();
 
     //useEffect는 특정 상태에 변경이 될 때 마다 자동처리 되는 함수 등록 
     useEffect(() => {
@@ -21,12 +22,22 @@ function ProfilePage() {
         xhr.open("GET", REST_SERVER_ADDRESS + "/api/user/private", false);
         xhr.setRequestHeader("Authorization", jwt);
         xhr.send();
-        const result = JSON.parse(xhr.responseText);
+
+        if (xhr.status === 200) {
+            const result = JSON.parse(xhr.responseText);
+            //json 안에는 code라는 number가 있고 user 객체가 있음
+            setData(result);
+        }
         // json 안에는 code 라는 number 가 있고, user : 객체가 있음
-        imageRef.current.src = result.user.profileImage;
-        nameRef.current.value = result.user.name;
 
     }, [jwt]) // 2번째 인자 []을 비워두면 맨처음 한번 랜더링되고 난 이후만 작동
+
+    useEffect(() => {
+        if(data && nameRef.current !== null) {
+            nameRef.current.value = data.user.name;
+        }
+        
+    }, [data])
 
     //===============================================================================
 
@@ -48,15 +59,13 @@ function ProfilePage() {
         }
 
         xhr.send(body); //send할때 FormData객체를 보내면 알아서  content-type이 multipart 설정됨.
-   
+
 
         if (xhr.status === 200) {
             const result = JSON.parse(xhr.responseText);
             //json 안에는 code라는 number가 있고 user 객체가 있음
-            imageRef.current.src = result.user.profileImage;
-            nameRef.current.value = result.user.name;
+
             window.alert("회원 정보가 변경 되었습니다.");
-            fileRef.current.value = "";
             navigate("/");
         } else {
             window.alert("회원 정보 변경에 실패하였습니다.");
@@ -90,21 +99,23 @@ function ProfilePage() {
             <NavBar />
             <>
                 <Link to="/">되돌아가기</Link>
-                <div className="container pt-3" style={{height : "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end"}}>
-                    <h4>#개인정보수정</h4>
-                    <form onSubmit={submitHandle} style={{border:"2px black solid", borderRadius:"8px", padding: "16px"}}>
-                        <p>
-                            <img style={{ width: "300nppx", height: "300px", cursor: "pointer" , borderRadius: "24px"}} ref={imageRef} onClick={imgClickHandle} />
-                            <input type="file" accept="image/*" ref={fileRef} onChange={fileChangeHandle} style={{ display: "none" }} />
-                        </p>
-                        <p>
-                            <input type="text" ref={nameRef} style={{width: "300px", height:"50px"}}/>
-                        </p>
-                        <p style={{display: "flex", justifyContent: "center"}}>
-                            <button type="submit" style={{width: "80px", height: "40px", borderRadius: "8px", backgroundColor: "skyblue"}}>수정</button>
-                        </p>
-                    </form>
-                </div>
+                {data &&
+                    <div className="container pt-3" style={{ height: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end" }}>
+                        <h4>#개인정보수정</h4>
+                        <form onSubmit={submitHandle} style={{ border: "2px black solid", borderRadius: "8px", padding: "16px" }}>
+                            <p>
+                                <img src={data.user.profileImage !== "" ? data.user.profileImage : defaultImage} style={{ width: "300px", height: "300px", cursor: "pointer", borderRadius: "24px" }} ref={imageRef} onClick={imgClickHandle} />
+                                <input type="file" accept="image/*" ref={fileRef} onChange={fileChangeHandle} style={{ display: "none" }} />
+                            </p>
+                            <p>
+                                <input type="text" ref={nameRef} style={{ width: "300px", height: "50px" }} />
+                            </p>
+                            <p style={{ display: "flex", justifyContent: "center" }}>
+                                <button type="submit" style={{ width: "80px", height: "40px", borderRadius: "8px", backgroundColor: "skyblue" }}>수정</button>
+                            </p>
+                        </form>
+                    </div>
+                }
             </>
         </>
     );
