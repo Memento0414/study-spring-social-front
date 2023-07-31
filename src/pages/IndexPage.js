@@ -17,11 +17,14 @@ function IndexPage() {
     return (
         <>
             <NavBar />
-            <div>
-                <h1>Index Page</h1>
-                {!jwt && <div>
-                    <Link to="/flow/login">로그인</Link>
-                    <Link to="/flow/signup">회원가입</Link>
+            <div style={{height : "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end"}}>
+                <h1 style={{fontSize:"100px"}}><b>TWITTER</b></h1>
+                {!jwt && 
+                <div>
+                    <form style={{display:"flex"}}>
+                   <Link to="/flow/signup"> <button className="form-control" style={{padding:"8px", backgroundColor:"skyblue", margin: "4px"}}> <b>회원가입</b></button></Link>
+                    <Link to="/flow/login"> <button className="form-control" style={{padding:"8px", width:"80px", backgroundColor:"skyblue",  margin: "4px"}}><b>로그인</b></button></Link>
+                    </form>
                 </div>}
             </div>
         </>

@@ -77,20 +77,20 @@ function HomePage() {
       {jwt &&
         <form ref={formRef} onSubmit={submitHandle}>
           <div className="card">
-            <div className="card-body">
+            <div className="card-body" >
               <div>
                 <textarea name="description" className="form-control-plaintext" style={{ resize: "none" }} placeholder="내용"></textarea>
               </div>
               <div className="d-flex flex-wrap">
-                사진 미리보기 영역
+                &lt;사진 미리보기 영역&gt;
               </div>
               <div>
-                <input type="file" name="attaches" accept="image/" multiple />
-                <button className="btn btn-sm btn-secondary"><i class="bi bi-images"></i></button>
+                <input type="file" name="attaches" accept="image/" multiple id="img_upload"/>
+ 
               </div>
             </div>
           </div>
-          <button className="form-control btn">등록</button>
+          <button className="form-control text-bg-dark" style={{padding:"8px"}}>등록</button>
         </form>}
 
       {
@@ -99,13 +99,13 @@ function HomePage() {
             <img src={one.writer.profileImage} style={{ width: 32 }} onError={errorImageHandle} />
             {one.writer.name}    <small>{one.writer.email} </small>
           </div>
-          <div className="card-body">
+          <div className="card-body" style={{display: "flex"}}>
             <div>
               {one.description}
             </div>
             {one.attaches.map(a =>
               <div className="p-3">
-                <img src={a.mediaUrl} className="img-fluid rounded" />
+                <img src={a.mediaUrl} className="img-fluid rounded" style={{height:"200px", width:"200px"}}/>
               </div>
             )}
           </div>

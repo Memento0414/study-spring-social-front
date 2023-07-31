@@ -30,19 +30,19 @@ function NavBar() {
         <div className="offcanvas-body">
           <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li className="nav-item" data-bs-dismiss="offcanvas"> 
-              <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+              <Link className="nav-link active" aria-current="page" to="/">홈</Link>
             </li>
             <li className="nav-item" data-bs-dismiss="offcanvas">
-              <Link className="nav-link" to="/flow/login">로그인</Link>
+              {!jwt && <Link className="nav-link" to="/flow/login">로그인</Link>} 
             </li>
               {jwt && <li className="nav-item dropdown">
               <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+                정보변경
               </Link>
               <ul className="dropdown-menu">
-                <li data-bs-dismiss="offcanvas"><Link className="dropdown-item" to="/settings/profile">정보변경</Link></li>
+                <li data-bs-dismiss="offcanvas"><Link className="dropdown-item" to="/settings/profile">프로필</Link></li>
                 <li data-bs-dismiss="offcanvas"><Link className="dropdown-item" to="/flow/logout">로그아웃</Link></li>
-                <li data-bs-dismiss="offcanvas"><Link className="dropdown-item" to="#">Something else here</Link></li>  
+                  
               </ul>
             </li>}
           </ul>

@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { REST_SERVER_ADDRESS } from "../../common/constant";
 import { useEffect, useRef, useState } from "react";
 import { jwtState } from "../..";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../component/NavBar";
 
 
@@ -11,6 +11,7 @@ function ProfilePage() {
     const nameRef = useRef();
     const imageRef = useRef();
     const fileRef = useRef();
+    const navigate =useNavigate();
 
     //useEffect는 특정 상태에 변경이 될 때 마다 자동처리 되는 함수 등록 
     useEffect(() => {
@@ -56,6 +57,7 @@ function ProfilePage() {
             nameRef.current.value = result.user.name;
             window.alert("회원 정보가 변경 되었습니다.");
             fileRef.current.value = "";
+            navigate("/");
         } else {
             window.alert("회원 정보 변경에 실패하였습니다.");
         }
@@ -90,7 +92,7 @@ function ProfilePage() {
                 <Link to="/">되돌아가기</Link>
                 <div className="container pt-3" style={{height : "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end"}}>
                     <h4>#개인정보수정</h4>
-                    <form onSubmit={submitHandle} style={{border:"2px skyblue solid", borderRadius:"8px", padding: "16px"}}>
+                    <form onSubmit={submitHandle} style={{border:"2px black solid", borderRadius:"8px", padding: "16px"}}>
                         <p>
                             <img style={{ width: "300nppx", height: "300px", cursor: "pointer" , borderRadius: "24px"}} ref={imageRef} onClick={imgClickHandle} />
                             <input type="file" accept="image/*" ref={fileRef} onChange={fileChangeHandle} style={{ display: "none" }} />
